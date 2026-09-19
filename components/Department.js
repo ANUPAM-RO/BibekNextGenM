@@ -83,9 +83,19 @@ export default function Department({ memberData }) {
                       >
                         <td>
                           <div className="flex items-center gap-3">
-                            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-secondary text-white shadow-sm shadow-primary/30 flex items-center justify-center text-xs font-bold">
-                              {initials(emp?.member_Name)}
-                            </div>
+                            {emp?.member_Image ? (
+                              <div className="h-10 w-10 shrink-0 rounded-lg bg-slate-100 ring-1 ring-slate-200 overflow-hidden flex items-center justify-center">
+                                <img
+                                  src={emp.member_Image}
+                                  alt={emp?.member_Name}
+                                  className="h-full w-full object-contain"
+                                />
+                              </div>
+                            ) : (
+                              <div className="h-8 w-8 shrink-0 rounded-full bg-gradient-to-br from-primary to-secondary text-white shadow-sm shadow-primary/30 flex items-center justify-center text-xs font-bold">
+                                {initials(emp?.member_Name)}
+                              </div>
+                            )}
                             <span className="font-medium text-slate-900">
                               {emp?.member_Name}
                             </span>

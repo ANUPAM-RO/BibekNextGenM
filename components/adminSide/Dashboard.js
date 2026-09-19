@@ -103,6 +103,7 @@ const Dashboard = () => {
             <table className="table w-full">
               <thead>
                 <tr className="text-slate-500 text-xs uppercase tracking-wide">
+                  <th></th>
                   <th>Id</th>
                   <th>Name</th>
                   <th>Designation</th>
@@ -114,6 +115,17 @@ const Dashboard = () => {
                 {!!memberData.length ? (
                   memberData?.map((s) => (
                     <tr className="hover" key={s.member_Id}>
+                      <td>
+                        {s.member_Image ? (
+                          <img
+                            src={s.member_Image}
+                            alt={s.member_Name}
+                            className="h-9 w-9 rounded-full object-cover ring-1 ring-slate-200"
+                          />
+                        ) : (
+                          <div className="h-9 w-9 rounded-full bg-slate-100 ring-1 ring-slate-200" />
+                        )}
+                      </td>
                       <td>{s.member_Id}</td>
                       <td className="font-medium text-slate-800">
                         {s.member_Name}
@@ -141,7 +153,7 @@ const Dashboard = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={5} className="text-center text-slate-400 py-6">
+                    <td colSpan={6} className="text-center text-slate-400 py-6">
                       No members added yet.
                     </td>
                   </tr>

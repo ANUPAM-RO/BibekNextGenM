@@ -32,10 +32,11 @@ export const Field = ({ label, children }) => (
 export const inputClass =
   "w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 px-4 text-slate-800 outline-none transition focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20";
 
-export const SubmitButton = ({ children }) => (
+export const SubmitButton = ({ children, disabled }) => (
   <button
     type="submit"
-    className="w-full mt-2 rounded-xl bg-primary py-3 font-semibold text-primary-content shadow-soft transition hover:brightness-110 active:scale-[0.99]"
+    disabled={disabled}
+    className="w-full mt-2 rounded-xl bg-primary py-3 font-semibold text-primary-content shadow-soft transition hover:brightness-110 active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed"
   >
     {children}
   </button>
