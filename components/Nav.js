@@ -6,7 +6,7 @@ const Nav = () => {
     <div className="sticky top-0 z-30 h-20 md:h-24 flex items-center justify-between px-6 md:px-10 bg-neutral text-neutral-content shadow-soft">
       <div className="flex items-center">
         <img
-          src="/company_logo.jpeg"
+          src="/company_logo.png"
           alt="Bibek NextGen Technologies"
           className="h-16 w-16 md:h-20 md:w-20 rounded-xl object-contain"
         />
