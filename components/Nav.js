@@ -3,13 +3,14 @@ import { Phone, Mail } from "lucide-react";
 
 const Nav = () => {
   return (
-    <div className="sticky top-0 z-30 h-20 md:h-24 flex items-center justify-between px-6 md:px-10 bg-neutral text-neutral-content shadow-soft">
+    <div className="sticky top-0 z-30 h-20 md:h-24 flex items-center justify-between px-6 md:px-10 bg-[#062621] text-neutral-content shadow-2xl shadow-black/40">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent" />
       <div className="flex items-center">
-        <img
-          src="/company_logo.png"
-          alt="Bibek NextGen Technologies"
+          <img
+            src="/company_logo.png"
+            alt="Bibek NextGen Technologies"
           className="h-16 w-16 md:h-20 md:w-20 rounded-xl object-contain"
-        />
+          />
       </div>
 
       <div className="flex items-center gap-3">

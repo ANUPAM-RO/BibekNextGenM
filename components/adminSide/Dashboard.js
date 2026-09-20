@@ -54,6 +54,7 @@ const ActionCell = ({ children }) => (
 
 const Dashboard = () => {
   const [memberData, setMemberData] = useState([]);
+  const [notificationData, setNotificationData] = useState([]);
   const [confirm, setConfirm] = useState(null);
 
   const router = useRouter();
@@ -65,9 +66,21 @@ const Dashboard = () => {
     });
   };
 
+  const getNotificationData = async () => {
+    getDocs(collection(database, "notifications")).then((querySnapshot) => {
+      const data = querySnapshot.docs.map((doc) => doc.data());
+      setNotificationData(data);
+    });
+  };
+
   const deleteMember = async (id) => {
     await deleteDoc(doc(database, "members", id));
     setMemberData((prev) => prev.filter((m) => m.member_Id !== id));
+  };
+
+  const deleteNotification = async (id) => {
+    await deleteDoc(doc(database, "notifications", id));
+    setNotificationData((prev) => prev.filter((n) => n.message_Id !== id));
   };
 
   const requestDelete = (message, action) => {
@@ -82,6 +95,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getMemberData();
+    getNotificationData();
   }, []);
 
   return (
@@ -93,6 +107,50 @@ const Dashboard = () => {
           </div>
           <h1 className="text-2xl font-bold text-slate-800">Dashboard</h1>
         </div>
+
+        <Panel
+          title="Notifications"
+          addHref="/adminPage/notification-add"
+          addLabel="Add Notification"
+        >
+          <div className="overflow-x-auto">
+            <table className="table w-full">
+              <thead>
+                <tr className="text-slate-500 text-xs uppercase tracking-wide">
+                  <th>ID</th>
+                  <th>Message</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {!!notificationData.length ? (
+                  notificationData?.map((s) => (
+                    <tr className="hover" key={s.message_Id}>
+                      <td>{s.message_Id}</td>
+                      <td>{s.message}</td>
+                      <ActionCell>
+                        <DeleteBtn
+                          onClick={() =>
+                            requestDelete(
+                              `Delete this notification? This cannot be undone.`,
+                              () => deleteNotification(s.message_Id)
+                            )
+                          }
+                        />
+                      </ActionCell>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={3} className="text-center text-slate-400 py-6">
+                      No notifications yet.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </Panel>
 
         <Panel
           title="All Members"
